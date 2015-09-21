@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Card1" representedClassName="FlashCard.Card1" syncable="YES">
+        <attribute name="back" attributeType="String" syncable="YES"/>
+        <attribute name="front" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Transformable" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <relationship name="aset" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Set" inverseName="card1s" inverseEntity="Set" syncable="YES"/>
+    </entity>
+    <entity name="Set" representedClassName="FlashCard.Set" syncable="YES">
+        <attribute name="setDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="setName" attributeType="String" syncable="YES"/>
+        <relationship name="card1s" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Card1" inverseName="aset" inverseEntity="Card1" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Card1" positionX="-252" positionY="-108" width="128" height="103"/>
+        <element name="Set" positionX="-72" positionY="-153" width="108" height="88"/>
+    </elements>
+</model>

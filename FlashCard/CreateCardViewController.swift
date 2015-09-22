@@ -178,6 +178,7 @@ class CreateCardViewController: UIViewController,UITextFieldDelegate, UITextView
         checkForwardButton()
     }
     
+    //from http://www.jogendra.com/2015/01/uitextfield-move-up-when-keyboard.html
     func animateViewMoving (up:Bool, moveValue :CGFloat){
         let movementDuration:NSTimeInterval = 0.3
         let movement:CGFloat = ( up ? -moveValue : moveValue)

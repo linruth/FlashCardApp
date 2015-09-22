@@ -43,7 +43,6 @@ class CreateCardViewController: UIViewController,UITextFieldDelegate, UITextView
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         
-        checkForwardButton()
         checkAddButton()
         checkDeleteButton()
         checkBackButton()
@@ -55,6 +54,7 @@ class CreateCardViewController: UIViewController,UITextFieldDelegate, UITextView
             textView.text = card.back
         }
         checkValidCardName()
+        checkForwardButton()
     }
     
     

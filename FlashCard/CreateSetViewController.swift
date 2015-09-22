@@ -102,7 +102,7 @@ class CreateSetViewController: UIViewController, UITextFieldDelegate, UITextView
         if segue.identifier == "Done" {
         let dest = segue.destinationViewController as! UINavigationController
         let finalDestination = dest.topViewController as! CreateCardViewController
-        finalDestination.recievedSetName = titleTextField.text
+        finalDestination.recievedSetName = titleTextField.text!
         finalDestination.recievedDescriptionName = descriptionTextView.text
         }
     }

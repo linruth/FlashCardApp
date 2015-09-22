@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class TableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate{
+class TableViewController: UITableViewController, NSFetchedResultsControllerDelegate{
     
     // MARK: Properties
     
@@ -33,12 +33,13 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
     func getAllSets(){
         let fetchRequest = NSFetchRequest(entityName:"Set")
         var error: NSError?
-        let fetchedResults = managedContext!.executeFetchRequest(fetchRequest,error: &error) as? [NSManagedObject]
-        if let results = fetchedResults {
+        do{
+            let fetchedResults = try managedContext!.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+            if let results = fetchedResults {
             finalArray = results as! [Set]
-        }
-        else {
-            println("Could not fetch \(error), \(error!.userInfo)")
+            }
+        }catch{
+           print("Could not fetch")
         }
     }
     
@@ -47,8 +48,12 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
         var error: NSError?
         let predicate = NSPredicate(format: "ANY card1s in %@", finalArray[index].card1s)
         fetchRequest.predicate = predicate
-        let results = managedContext!.executeFetchRequest(fetchRequest, error: &error)
-        cardArray = results as![Card1]
+        do{
+            let results = try managedContext!.executeFetchRequest(fetchRequest)
+            cardArray = results as![Card1]
+        }catch{
+            print("Could not fetch cards form set")
+        }
     }
 
     
@@ -85,12 +90,12 @@ class TableViewController: UITableViewController, UITableViewDataSource, UITable
             managedContext!.deleteObject(finalArray[indexPath.row])
             finalArray.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-           // let toDelete = persons[0]
             var error: NSError?
-            if managedContext!.save(&error){
-                println("Set was deleted")
-            }else{
-                println("Could not delete \(error), \(error!.userInfo)")
+            do {
+                try managedContext!.save()
+                print("Set was deleted")
+                }catch{
+                print("Could not delete set")
             }
         }
     }

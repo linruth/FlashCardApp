@@ -79,11 +79,13 @@ class CreateCardViewController: UIViewController,UITextFieldDelegate, UITextView
             card1.setValue(cardSet[i].back, forKey: "back")
             setOrganization.addObject(card1)
             var error: NSError?
-            if !managedContext.save(&error){
-                println("Could not save \(error), \(error?.userInfo)")
+            do {
+                try managedContext.save()
+                print("Card was deleted")
+            }catch{
+                print("Could not delete card")
             }
         }
-        managedContext.save(nil)
     }
     
     func checkBackButton(){
@@ -111,7 +113,8 @@ class CreateCardViewController: UIViewController,UITextFieldDelegate, UITextView
             forwardButton.enabled = false
         }
         else {
-            forwardButton.enabled = true        }
+            forwardButton.enabled = true
+        }
     }
     
     func checkDeleteButton(){
@@ -134,11 +137,11 @@ class CreateCardViewController: UIViewController,UITextFieldDelegate, UITextView
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        checkForwardButton()
         checkAddButton()
         checkDeleteButton()
         checkBackButton()
         checkValidCardName()
+        checkForwardButton()
     }
     
     func checkValidCardName() {
@@ -166,11 +169,11 @@ class CreateCardViewController: UIViewController,UITextFieldDelegate, UITextView
     }
     
     func textViewDidEndEditing(textView: UITextView){
-        checkForwardButton()
         checkAddButton()
         checkBackButton()
         checkValidCardName()
         checkDeleteButton()
+        checkForwardButton()
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
@@ -200,7 +203,7 @@ class CreateCardViewController: UIViewController,UITextFieldDelegate, UITextView
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
         // The info dictionary contains multiple representations of the image, and this uses the original.
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         // Set photoImageView to display the selected image.
@@ -229,7 +232,7 @@ class CreateCardViewController: UIViewController,UITextFieldDelegate, UITextView
             let dest = segue.destinationViewController as! CreateCardViewController
             dest.recievedDescriptionName = recievedDescriptionName
             dest.recievedSetName = recievedSetName
-            if ((card?.front != nameTextField.text) || (card?.photo != photoImageView.image) || (card?.back != textView.text)) && (!nameTextField.text.isEmpty && !textView.text.isEmpty){
+            if ((card?.front != nameTextField.text) || (card?.photo != photoImageView.image) || (card?.back != textView.text)) && (!nameTextField.text!.isEmpty && !textView.text.isEmpty){
                 let front = nameTextField.text ?? ""
                 let photo = photoImageView.image
                 let back = textView.text
@@ -265,7 +268,7 @@ class CreateCardViewController: UIViewController,UITextFieldDelegate, UITextView
             let dest = segue.destinationViewController as! CreateCardViewController
             dest.recievedDescriptionName = recievedDescriptionName
             dest.recievedSetName = recievedSetName
-            if ((card?.front != nameTextField.text ?? "") || (card?.photo != photoImageView.image) || (card?.back != textView.text)) && (!nameTextField.text.isEmpty && !textView.text.isEmpty){
+            if ((card?.front != nameTextField.text ?? "") || (card?.photo != photoImageView.image) || (card?.back != textView.text)) && (!nameTextField.text!.isEmpty && !textView.text.isEmpty){
                 let front = nameTextField.text ?? ""
                 let photo = photoImageView.image
                 let back = textView.text
@@ -281,7 +284,7 @@ class CreateCardViewController: UIViewController,UITextFieldDelegate, UITextView
             
         else if segue.identifier == "Save" {
             if (cardNumber != cardArray.count){
-                if ((card?.front != nameTextField.text ?? "") || (card?.photo != photoImageView.image) || (card?.back != textView.text)) && (!nameTextField.text.isEmpty && !textView.text.isEmpty){
+                if ((card?.front != nameTextField.text ?? "") || (card?.photo != photoImageView.image) || (card?.back != textView.text)) && (!nameTextField.text!.isEmpty && !textView.text.isEmpty){
                     let front = nameTextField.text ?? ""
                     let photo = photoImageView.image
                     let back = textView.text

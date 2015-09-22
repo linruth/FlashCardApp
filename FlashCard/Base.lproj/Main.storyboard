@@ -172,7 +172,7 @@
                     <navigationItem key="navigationItem" title="Set Information" id="SPZ-l9-BOX">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="zeq-dn-GRi">
                             <connections>
-                                <segue destination="3Ma-pB-BbR" kind="show" id="v45-kG-dLM"/>
+                                <segue destination="3Ma-pB-BbR" kind="presentation" id="v45-kG-dLM"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" style="done" systemItem="done" id="oUL-4l-5wy">
@@ -299,6 +299,7 @@
                             <constraint firstItem="ijK-dG-nUu" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="lP3-x3-AMD"/>
                             <constraint firstItem="ijK-dG-nUu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="p72-Hh-WkF"/>
                             <constraint firstItem="ijK-dG-nUu" firstAttribute="top" secondItem="GWm-gf-l57" secondAttribute="bottom" constant="12" id="tJr-jN-yl1"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="GWm-gf-l57" secondAttribute="bottom" constant="56" id="twz-ea-Bbo"/>
                             <constraint firstItem="2uI-FQ-xD4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="vWC-I2-ITF"/>
                             <constraint firstItem="hQD-45-toy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-0.5" id="xpQ-Zj-WB0"/>
                         </constraints>
@@ -508,9 +509,9 @@
         <image name="defaultPhoto" width="157" height="158"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="P22-86-j76"/>
         <segue reference="DGi-SD-XPH"/>
         <segue reference="cmH-Th-qLw"/>
-        <segue reference="P22-86-j76"/>
         <segue reference="xWn-0g-p5G"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -161,6 +161,7 @@ class CreateCardViewController: UIViewController,UITextFieldDelegate, UITextView
     // MARK: UITextViewDelegate
     
     func textViewDidBeginEditing(textView: UITextView){
+        animateViewMoving(true, moveValue: 175)
         saveButton.enabled = false
         backButton.enabled = false
         forwardButton.enabled = false
@@ -169,11 +170,22 @@ class CreateCardViewController: UIViewController,UITextFieldDelegate, UITextView
     }
     
     func textViewDidEndEditing(textView: UITextView){
+        animateViewMoving(false, moveValue: 175)
         checkAddButton()
         checkBackButton()
         checkValidCardName()
         checkDeleteButton()
         checkForwardButton()
+    }
+    
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:NSTimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        UIView.commitAnimations()
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
